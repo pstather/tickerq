@@ -23,9 +23,8 @@ public class Test
   [TickerFunction("Test2", TickerTaskPriority.Normal)]
   public async Task Test2(TickerFunctionContext<Test2Input> context)
   {
-    var functionName = MethodBase.GetCurrentMethod()!.Name;
-    _logger.LogInformation("Delaying for {Seconds} seconds for function {FunctionName}", context.Request.SecondsTimeout, functionName);
+    _logger.LogInformation("Delaying for {Seconds} seconds for function {FunctionName}", context.Request.SecondsTimeout, context.FunctionName);
     await Task.Delay(TimeSpan.FromSeconds(context.Request.SecondsTimeout));
-    _logger.LogInformation("Input Message for {FunctionName} is: {Message}", functionName, context.Request.Input);
+    _logger.LogInformation("Input Message for {FunctionName} is: {Message}", context.FunctionName, context.Request.Input);
   }
 }
